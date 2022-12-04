@@ -19,6 +19,7 @@
 		4AE84B102938B85F00D08B8E /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE84B0F2938B85F00D08B8E /* Extentions.swift */; };
 		4AE84B132938CB8B00D08B8E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE84B122938CB8B00D08B8E /* LoginController.swift */; };
 		4AE84B152938CC1600D08B8E /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE84B142938CC1600D08B8E /* RegistrationController.swift */; };
+		4AE84B17293B8E5100D08B8E /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE84B16293B8E5100D08B8E /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		4AE84B0F2938B85F00D08B8E /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		4AE84B122938CB8B00D08B8E /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		4AE84B142938CC1600D08B8E /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		4AE84B16293B8E5100D08B8E /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				4AE84B0F2938B85F00D08B8E /* Extentions.swift */,
+				4AE84B16293B8E5100D08B8E /* Utilities.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 			files = (
 				4AE84B0C2938A3C600D08B8E /* ConversationsController.swift in Sources */,
 				4AE84AEC2938A0BE00D08B8E /* AppDelegate.swift in Sources */,
+				4AE84B17293B8E5100D08B8E /* Utilities.swift in Sources */,
 				4AE84B0A2938A3B800D08B8E /* ExploreController.swift in Sources */,
 				4AE84B0E2938A40D00D08B8E /* NotificationController.swift in Sources */,
 				4AE84B132938CB8B00D08B8E /* LoginController.swift in Sources */,
