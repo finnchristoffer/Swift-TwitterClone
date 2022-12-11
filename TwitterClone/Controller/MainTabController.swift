@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MainTabController: UITabBarController {
 
@@ -23,8 +24,42 @@ class MainTabController: UITabBarController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureViewController()
-        configureUI()
+        tabBar.isTranslucent = false
+        tabBar.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        tabBar.unselectedItemTintColor = UIColor.black
+        view.backgroundColor = .twitterBlue
+//        logUserOut()
+        authenticateUserAndConfigureUI()
+        
+    }
+    
+    //MARK: - API
+    
+    func fetchUser() {
+        UserService.shared.fetchUser()
+    }
+    
+    func authenticateUserAndConfigureUI() {
+        if Auth.auth().currentUser == nil {
+            DispatchQueue.main.async {
+                let nav = UINavigationController(rootViewController: LoginController())
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
+            }
+        } else {
+            configureViewController()
+            configureUI()
+            fetchUser()
+        }
+    }
+    
+    func logUserOut() {
+        do {
+            try Auth.auth().signOut()
+            print("DEBUG: Did logged out..")
+        } catch let error {
+            print("DEBUg: Failed to sign out with error \(error.localizedDescription)")
+        }
     }
     
     // MARK: - Selectors
