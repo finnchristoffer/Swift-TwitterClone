@@ -81,12 +81,6 @@ class profileHeader: UICollectionReusableView {
         return label
     }()
     
-    private let underlineView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .twitterBlue
-        return view
-    }()
-    
     private let followingLabel: UILabel = {
         let label = UILabel()
         label.text = "0 following"
@@ -142,8 +136,6 @@ class profileHeader: UICollectionReusableView {
         addSubview(filterBar)
         filterBar.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 50)
         
-        addSubview(underlineView)
-        underlineView.anchor(left: leftAnchor, bottom: bottomAnchor, width: frame.width/3, height: 2)
     }
     
     required init?(coder: NSCoder) {
@@ -188,11 +180,6 @@ class profileHeader: UICollectionReusableView {
 
 extension profileHeader: ProfileFilterViewDelegate {
     func filterview(_ view: ProfileFilterview, didselect indexpath: IndexPath) {
-        guard let cell = view.collectionView.cellForItem(at: indexpath) as? ProfileFilterCell else {return}
-        
-        let xPosition = cell.frame.origin.x
-        UIView.animate(withDuration: 0.3) {
-            self.underlineView.frame.origin.x = xPosition
-        }
+
     }
 }
