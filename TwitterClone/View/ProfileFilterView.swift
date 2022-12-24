@@ -10,7 +10,7 @@ import UIKit
 private let reuseIdentifier = "ProfileFilterCell"
 
 protocol ProfileFilterViewDelegate: class {
-    func filterview(_ view: ProfileFilterview, didselect indexpath: IndexPath)
+    func filterview(_ view: ProfileFilterview, didselect indexpath: Int)
 }
 
 class ProfileFilterview: UIView {
@@ -84,7 +84,7 @@ extension ProfileFilterview: UICollectionViewDelegate {
             self.underlineView.frame.origin.x = xPosition
         }
         
-        delegate?.filterview(self, didselect: indexPath)
+        delegate?.filterview(self, didselect: indexPath.row)
     }
 }
 
