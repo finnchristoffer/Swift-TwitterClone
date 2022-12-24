@@ -49,7 +49,7 @@ struct AuthService {
                                   "fullname": fullname,
                                   "profileImageUrl": profileImageUrl]
                     
-                    USERS_REF.child(uid).updateChildValues(values, withCompletionBlock: completion)
+                    REF_USER.child(uid).updateChildValues(values, withCompletionBlock: completion)
                     
                     }
                 }

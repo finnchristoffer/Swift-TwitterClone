@@ -48,6 +48,7 @@ class ProfileController: UICollectionViewController {
         configureCollectionView()
         fetchTweets()
         fetchLikedTweets()
+        fetchReplies()
         checkIfUserIsFollowed()
         fetchUserStats()
         
@@ -68,6 +69,18 @@ class ProfileController: UICollectionViewController {
         }
     }
     
+    func fetchLikedTweets() {
+        TweetService.shared.fetchLikes(forUser: user) { tweets in
+            self.likedTweets = tweets
+        }
+    }
+    
+    func fetchReplies() {
+        TweetService.shared.fetchReplies(forUser: user) { tweets in
+            self.replies = tweets
+        }
+    }
+    
     func checkIfUserIsFollowed() {
         UserService.shared.checkIfUserFollowed(uid: user.uid) { isFollowed in
             self.user.isFollowed = isFollowed
@@ -79,12 +92,6 @@ class ProfileController: UICollectionViewController {
         UserService.shared.fetchUserStats(uid: user.uid) { stats in
             self.user.stats = stats
             self.collectionView.reloadData()
-        }
-    }
-    
-    func fetchLikedTweets() {
-        TweetService.shared.fetchLikes(forUser: user) { tweets in
-            self.likedTweets = tweets
         }
     }
     
@@ -133,7 +140,7 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let viewModel = TweetViewModel(tweet: tweets[indexPath.row])
+        let viewModel = TweetViewModel(tweet: currentDataSource[indexPath.row])
         let height = viewModel.size(forwidth: view.frame.width).height
         return CGSize(width: view.frame.width, height: height + 72)
     }
