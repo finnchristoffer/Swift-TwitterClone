@@ -17,7 +17,7 @@ class FeedController: UICollectionViewController {
     var user: User? {
         didSet { configureLeftBarButton()}
     }
-
+    
     private var tweets = [Tweet]() {
         didSet { collectionView.reloadData() }
     }
@@ -47,22 +47,24 @@ class FeedController: UICollectionViewController {
         collectionView.refreshControl?.beginRefreshing()
         
         TweetService.shared.fetchTweets { tweets in
-            self.tweets = tweets
-            self.checkIfUserLikedTweets(tweets)
             self.tweets = tweets.sorted(by:  { $0.timestamp > $1.timestamp })
+            self.checkIfUserLikedTweets()
+            
             self.collectionView.refreshControl?.endRefreshing()
         }
     }
     
-    func checkIfUserLikedTweets(_ tweet: [Tweet]) {
-        for (index, tweet) in tweets.enumerated() {
+    func checkIfUserLikedTweets() {
+        self.tweets.forEach { tweet in
             TweetService.shared.checkIfUserLikedTweet(tweet) { didLike in
                 guard didLike == true else {return}
                 
-                self.tweets[index].didLike = true
+                if let index = self.tweets.firstIndex(where: { $0.tweetID == tweet.tweetID}){
+                    self.tweets[index].didLike = true
             }
         }
     }
+}
     // MARK: - Helpers
     
     func configureUI() {
