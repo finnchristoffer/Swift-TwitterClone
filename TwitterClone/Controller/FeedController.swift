@@ -35,13 +35,22 @@ class FeedController: UICollectionViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
+    // MARK: - Selectors
+    
+    @objc func handleRefresh() {
+        fetchTweets()
+    }
     
     // MARK: - API
     
     func fetchTweets() {
+        collectionView.refreshControl?.beginRefreshing()
+        
         TweetService.shared.fetchTweets { tweets in
             self.tweets = tweets
             self.checkIfUserLikedTweets(tweets)
+            self.tweets = tweets.sorted(by:  { $0.timestamp > $1.timestamp })
+            self.collectionView.refreshControl?.endRefreshing()
         }
     }
     
@@ -66,6 +75,10 @@ class FeedController: UICollectionViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.setDimensions(width: 44, height: 44)
         navigationItem.titleView = imageView
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
 
     }
     
